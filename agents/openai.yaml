@@ -1,0 +1,7 @@
+interface:
+  display_name: "Aydınlat"
+  short_description: "Göreve uygun skill ve araçları dinamik seçer"
+  default_prompt: "Bu görev için en uygun skill ve araçları seçmek üzere $aydinlat kullan."
+
+policy:
+  allow_implicit_invocation: true
