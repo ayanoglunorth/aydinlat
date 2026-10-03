@@ -1,10 +1,10 @@
 # Aydınlat
 
-Aydınlat is a dynamic skill router for Codex. It inspects the skills, plugins,
-apps, and tools available in the current session, then selects the smallest
-compatible set for the task.
+Aydınlat is a dynamic skill router for Codex. It checks the skills, plugins,
+apps, and tools available in the current session, then picks the smallest set
+that fits the task.
 
-Instead of hard-coding one person's setup, Aydınlat adapts to each installation.
+Aydınlat adapts to each installation instead of hard-coding one person's setup.
 Newly installed capabilities can be considered without updating Aydınlat's own
 catalog.
 
@@ -20,7 +20,7 @@ catalog.
 - Activates Caveman `full` mode for the rest of the chat when Caveman is
   installed. Caveman is optional and is not bundled.
 - Leaves Ponytail's current state unchanged.
-- Supports explicit and implicit invocation.
+- Supports explicit and implicit use.
 
 ## Requirements
 
@@ -33,7 +33,7 @@ catalog.
 
 ### Clone with Git
 
-This is the recommended method because updates only require `git pull`.
+This is the recommended method because updates only need `git pull`.
 
 #### Windows PowerShell (install or update)
 
@@ -97,9 +97,8 @@ Invoke Aydınlat explicitly:
 $aydinlat Create a polished PowerPoint for this quarterly review.
 ```
 
-You can also select **Aydınlat** from the skill or slash menu. Implicit
-invocation is enabled, so Codex may select it when a request spans several
-possible workflows.
+You can also select **Aydınlat** from the skill or slash menu. Implicit use is
+enabled, so Codex may select it when a request spans several possible workflows.
 
 Explicit activation keeps Aydınlat active for the rest of the chat. Implicit
 activation applies Aydınlat routing to the current task. When Caveman is
@@ -120,8 +119,8 @@ normal mode. Caveman can also be disabled through its own controls.
 5. It performs the task without granting itself extra permissions or installing
    missing capabilities.
 
-User choices always take priority over Aydınlat's defaults. Existing repository
-and brand rules take priority over speculative new styles.
+User choices take priority over Aydınlat's defaults. Existing repository and
+brand rules take priority over speculative new styles.
 
 ## Limitations
 
@@ -158,7 +157,7 @@ should preserve these invariants:
 
 ## Contributing
 
-Issues and focused pull requests are welcome. Keep the router dynamic and avoid
+Issues and focused pull requests are welcome. Keep the router dynamic, and avoid
 adding machine-specific skill catalogs or permissions that the user did not
 grant.
 
