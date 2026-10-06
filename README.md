@@ -19,75 +19,56 @@ catalog.
 - Preserves existing project conventions, brand rules, and authorization limits.
 - Activates Caveman `full` mode for the rest of the chat when Caveman is
   installed. Caveman is optional and is not bundled.
-- Leaves Ponytail's current state unchanged.
+- Applies Caveman to progress and tool-adjacent commentary, not only final
+  answers, and suppresses routine plan narration between tool calls.
+- Honors active modes, while selecting any matching installed mode or process
+  skill when it adds a distinct responsibility.
 - Supports explicit and implicit use.
-
-## Requirements
-
-- A Codex surface with local skill support, such as the ChatGPT desktop app,
-  Codex CLI, or Codex IDE extension.
-- Git only if you choose the clone-based installation.
-- No runtime dependencies.
 
 ## Installation
 
-### Clone with Git
-
-This is the recommended method because updates only need `git pull`.
-
-#### Windows PowerShell (install or update)
-
-```powershell
-$skillPath = Join-Path $HOME ".agents\skills\aydinlat"
-
-if (Test-Path (Join-Path $skillPath ".git")) {
-    git -C $skillPath pull --ff-only
-} elseif (Test-Path $skillPath) {
-    throw "The target exists but is not a Git clone: $skillPath"
-} else {
-    New-Item -ItemType Directory -Force (Split-Path $skillPath) | Out-Null
-    git clone https://github.com/ayanoglunorth/aydinlat.git $skillPath
-}
-```
-
-Run the same block again whenever you want to update Aydınlat.
-
-#### macOS or Linux
+For Codex, run one command:
 
 ```bash
-mkdir -p ~/.agents/skills
-git clone https://github.com/ayanoglunorth/aydinlat.git ~/.agents/skills/aydinlat
+npx skills add ayanoglunorth/aydinlat -a codex
 ```
 
-### Download as ZIP
-
-1. Open the repository on GitHub.
-2. Select **Code**, then **Download ZIP**.
-3. Extract the archive.
-4. Rename the extracted folder to `aydinlat` if necessary.
-5. Move the folder into your user skill directory:
-
-   - Windows: `%USERPROFILE%\.agents\skills\aydinlat`
-   - macOS/Linux: `~/.agents/skills/aydinlat`
-
-The installed folder must contain `SKILL.md` directly at its root.
-
-Restart Codex if Aydınlat does not appear immediately.
-
-## Updating
-
-For an existing Git installation on macOS or Linux:
+Restart Codex, then open a new chat. For another supported agent, omit `-a
+codex` and let the installer choose the target:
 
 ```bash
-git -C ~/.agents/skills/aydinlat pull --ff-only
+npx skills add ayanoglunorth/aydinlat
 ```
 
-On Windows, rerun the PowerShell block under **Installation**. It installs the
-skill when the folder is missing and updates it when the Git clone already
-exists.
+The installer runs through `npx`, so Node.js is the only prerequisite. If your
+agent has a skill manager instead, add this repository there:
+`https://github.com/ayanoglunorth/aydinlat`.
 
-ZIP installations can be updated by replacing the existing folder with the
-contents of a newer archive.
+Run the same command again to refresh the installed skill.
+
+## Optional companions
+
+After installing Aydınlat, start a new chat and write:
+
+```text
+$aydinlat setup
+```
+
+It checks the setup only through the skill or plugin manager available on that
+host. If it can verify that one of these optional companions is missing, it
+explains the choice and asks before installing anything. If it cannot verify a
+companion, it marks it as unknown and links to its official installer.
+
+| Companion | What it adds |
+| --- | --- |
+| [Ponytail](https://github.com/DietrichGebert/ponytail) | Keeps coding changes small and avoids unnecessary dependencies. |
+| [Superpowers](https://github.com/obra/superpowers) | Adds a structured workflow for software changes. |
+| [Caveman](https://github.com/JuliusBrussee/caveman) | Keeps chat output concise. |
+
+Each is optional. Aydınlat does not depend on them. On approval, it uses the
+host's native marketplace or installer and reports a restart requirement when
+the installer provides one. If the host cannot manage installations, it links
+to the official source.
 
 ## Usage
 
@@ -105,6 +86,9 @@ activation applies Aydınlat routing to the current task. When Caveman is
 installed, Aydınlat activates Caveman `full` mode for the rest of the chat in
 either case.
 
+Use `$aydinlat setup` when you want the optional companion check. Aydınlat
+never installs, updates, or changes permissions without a clear confirmation.
+
 To stop the persistent mode, say `stop aydinlat`, `Aydınlat'ı kapat`, or request
 normal mode. Caveman can also be disabled through its own controls.
 
@@ -112,12 +96,17 @@ normal mode. Caveman can also be disabled through its own controls.
 
 1. Aydınlat identifies the requested output, action, constraints, and project
    context.
-2. It reads the live names and descriptions of available capabilities.
-3. It opens only the full instructions for direct matches.
-4. It selects the minimum compatible combination and reports that selection in
+2. It searches the live catalog by task verbs, constraints, symptoms, and named
+   services.
+3. It combines only direct matches with distinct roles: format owner, workflow,
+   guard or mode, and live connector when needed.
+4. It opens only the full instructions for that compatible combination and
+   reports the selection in
    one short line.
 5. It performs the task without granting itself extra permissions or installing
-   missing capabilities.
+   missing capabilities. Routine plan and tool narration stay suppressed;
+   progress appears only for a new blocker, risk, result, decision, or a
+   host-required update during long work.
 
 User choices take priority over Aydınlat's defaults. Existing repository and
 brand rules take priority over speculative new styles.
@@ -125,8 +114,8 @@ brand rules take priority over speculative new styles.
 ## Limitations
 
 - Aydınlat can route only capabilities exposed by the current host and session.
-- It does not install missing skills or plugins unless the user requests that
-  separate action.
+- It installs an optional companion only after it can inspect the setup and the
+  user confirms that exact installation.
 - It cannot override system policy, repository instructions, authorization
   requirements, or tool availability.
 
@@ -149,11 +138,12 @@ display name, default prompt, and implicit invocation policy.
 The skill passes the validator bundled with Codex's Skill Creator. Changes
 should preserve these invariants:
 
-- no static inventory of machine-specific capabilities;
+- no static routing inventory of machine-specific capabilities;
 - no hard-coded user paths;
 - no embedded copy of Caveman;
-- no automatic Ponytail state changes; and
-- minimum compatible skill selection.
+- no unrequested mode-state overrides; and
+- minimum compatible skill selection; and
+- no routine plan or tool narration after the one-line skill selection.
 
 ## Contributing
 
