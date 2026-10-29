@@ -1,8 +1,8 @@
 # Aydınlat
 
-Aydınlat is a dynamic skill router for Codex. It checks the skills, plugins,
-apps, and tools available in the current session, then picks the smallest set
-that fits the task.
+Aydınlat helps Codex choose the skills, plugins, apps, and tools a task needs.
+It reads the capabilities available in the current session and uses only the
+ones that add something to the work.
 
 Aydınlat adapts to each installation instead of hard-coding one person's setup.
 Newly installed capabilities can be considered without updating Aydınlat's own
@@ -27,37 +27,50 @@ catalog.
 
 ## Installation
 
-For Codex, run one command:
+Start the interactive installer in a terminal (Node.js 22.20 or later):
 
 ```bash
-npx skills add ayanoglunorth/aydinlat -a codex
+npx -y github:ayanoglunorth/aydinlat
 ```
 
-Restart Codex, then open a new chat. For another supported agent, omit `-a
-codex` and let the installer choose the target:
+Choose one or more agents: Codex, Claude Code, Cursor, Gemini CLI, Antigravity
+IDE, or Antigravity CLI (`agy`). Gemini CLI and Antigravity are separate
+targets. Then choose any companions you want. None are selected by default.
+The installer uses user scope, skips skill folders it finds, and reports the
+result for each choice. Restart the agent or open a new chat afterward.
+Use `--dry-run` to preview the commands and `--help` for usage.
+On npm 12 or newer, add `--allow-git=root` after `npx` if npm blocks a GitHub
+package with `EALLOWGIT`.
+
+For a standard skill-only install without the companion selection screen:
 
 ```bash
-npx skills add ayanoglunorth/aydinlat
+npx skills@latest add ayanoglunorth/aydinlat --skill aydinlat -a codex -g
 ```
 
-The installer runs through `npx`, so Node.js is the only prerequisite. If your
-agent has a skill manager instead, add this repository there:
-`https://github.com/ayanoglunorth/aydinlat`.
-
-Run the same command again to refresh the installed skill.
+Change `codex` to another agent supported by the [Skills CLI](https://github.com/vercel-labs/skills/blob/main/docs/commands.md).
+The skill itself has no runtime dependencies. To update an existing skill, use
+`npx skills@latest update aydinlat -g`; the interactive installer skips existing
+copies rather than overwriting them.
 
 ## Optional companions
 
-After installing Aydınlat, start a new chat and write:
+The terminal installer offers Ponytail, Superpowers, and Caveman. Select any
+combination or skip them all. Where a companion has a verified terminal
+installer for your agent, Aydınlat uses it. Other selections receive the
+project's manual setup instructions. Plugins and hooks may still need review
+inside the agent.
+
+After installation, you can also start a new chat and write:
 
 ```text
 $aydinlat setup
 ```
 
-It checks the setup only through the skill or plugin manager available on that
-host. If it can verify that one of these optional companions is missing, it
-explains the choice and asks before installing anything. If it cannot verify a
-companion, it marks it as unknown and links to its official installer.
+This chat command checks the host's skill or plugin manager. When it can verify
+that a companion is missing, it explains the option and asks before installing.
+When it cannot verify the installation state, it says so and links to the
+official source.
 
 | Companion | What it adds |
 | --- | --- |
@@ -65,10 +78,12 @@ companion, it marks it as unknown and links to its official installer.
 | [Superpowers](https://github.com/obra/superpowers) | Adds a structured workflow for software changes. |
 | [Caveman](https://github.com/JuliusBrussee/caveman) | Keeps chat output concise. |
 
-Each is optional. Aydınlat does not depend on them. On approval, it uses the
-host's native marketplace or installer and reports a restart requirement when
-the installer provides one. If the host cannot manage installations, it links
-to the official source.
+Each is optional. Aydınlat does not depend on them. Chat-based setup asks
+before installing. The terminal installer acts only on the boxes you select.
+
+Ponytail, Superpowers, and Caveman are separate projects. Their names and links
+identify compatible options only; Aydınlat does not include or redistribute
+their code or documentation, and their own licenses apply when installed.
 
 ## Usage
 
@@ -114,8 +129,8 @@ brand rules take priority over speculative new styles.
 ## Limitations
 
 - Aydınlat can route only capabilities exposed by the current host and session.
-- It installs an optional companion only after it can inspect the setup and the
-  user confirms that exact installation.
+- Chat-based setup installs a companion only after inspection and confirmation.
+- The terminal installer installs only companions explicitly selected there.
 - It cannot override system policy, repository instructions, authorization
   requirements, or tool availability.
 
@@ -126,6 +141,9 @@ aydinlat/
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
+├── install.mjs
+├── install.test.mjs
+├── package.json
 ├── LICENSE
 └── README.md
 ```

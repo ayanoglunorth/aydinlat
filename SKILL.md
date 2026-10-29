@@ -46,6 +46,10 @@ Run this flow only when the user explicitly asks to install, set up, or check
 Aydinlat or its companions. Do not recommend installations during ordinary
 task routing.
 
+This chat-based flow is separate from the optional companion selection in the
+terminal installer described in README.md. In the terminal, the user's checked
+choices authorize only those named installations.
+
 1. Use an exposed skill or plugin manager to inspect what it can verify about
    the local setup. A task catalog alone is not proof that an unlisted skill is
    absent.
