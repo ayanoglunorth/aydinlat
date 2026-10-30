@@ -1,6 +1,6 @@
 ---
 name: aydinlat
-description: Dynamically route complex tasks to the smallest compatible set of skills, plugins, apps, and tools currently available in the session. When Caveman is installed, activate its full mode for concise chat. Use when explicitly invoked as $aydinlat or when a request spans multiple possible workflows such as design, coding, presentations, documents, spreadsheets, media, browser, or app work. Do not use for simple tasks with one obvious capability.
+description: Routes a task through available skills, plugins, apps, and tools. Use when explicitly invoked as $aydinlat or when a request spans multiple possible workflows.
 ---
 
 # Aydinlat
@@ -79,7 +79,8 @@ choices authorize only those named installations.
    catalog by the task's verbs, deliverable, constraints, named services, and
    failure symptoms. When the catalog is present, do not scan plugin caches or
    assume machine-specific paths.
-3. Shortlist direct matches by responsibility, not by a fixed list of names:
+3. Honor a skill the user explicitly names when it is available and relevant. For
+   other needs, shortlist direct matches by responsibility, not by a fixed list of names:
    specialized deliverable owner, task workflow, process or safety guard,
    constraint or mode, and live-service connector. Read the complete `SKILL.md`
    for each selected skill before acting; do not load a candidate that adds no
@@ -98,7 +99,8 @@ choices authorize only those named installations.
      a plugin supplies both guidance and a tool, use each only for the role it
      adds.
    - Prefer a narrow exact match over a general umbrella skill only when both
-     cover the same responsibility.
+     cover the same responsibility. A named skill owns its requested method or
+     output; do not replace its full instructions with a general skill's summary.
 5. Follow the selected instructions without expanding the user's authorization.
    Never install a skill or plugin unless the user asks for installation.
 6. If a selected capability is missing or inaccessible, state the decisive

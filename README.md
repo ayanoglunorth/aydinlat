@@ -111,8 +111,8 @@ normal mode. Caveman can also be disabled through its own controls.
 
 1. Aydınlat identifies the requested output, action, constraints, and project
    context.
-2. It searches the live catalog by task verbs, constraints, symptoms, and named
-   services.
+2. It honors relevant skills the user names, then searches the live catalog by
+   task verbs, constraints, symptoms, and named services.
 3. It combines only direct matches with distinct roles: format owner, workflow,
    guard or mode, and live connector when needed.
 4. It opens only the full instructions for that compatible combination and
