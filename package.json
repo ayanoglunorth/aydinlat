@@ -1,13 +1,18 @@
 {
   "name": "aydinlat-installer",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "description": "Installer for the Aydınlat agent skill and its optional companions",
   "private": true,
   "type": "module",
-  "bin": "./install.mjs",
+  "bin": {
+    "aydinlat": "./install.mjs",
+    "aydinlat-installer": "./install.mjs"
+  },
+  "files": ["install.mjs", "skills"],
   "scripts": {
     "test": "node --test"
   },
   "engines": {
-    "node": ">=22.20.0"
+    "node": ">=18"
   }
 }

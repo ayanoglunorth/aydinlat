@@ -1,0 +1,7 @@
+interface:
+  display_name: "Aydınlat"
+  short_description: "Routes each task to the right installed skills and cuts reply tokens"
+  default_prompt: "Use $aydinlat to pick the right skills and tools for this task."
+
+policy:
+  allow_implicit_invocation: true
